@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "kindle_web_app"
+version = "0.1.0"
+description = ""
+authors = ["Pedro Henrique"]
+license = "AGPL"
+
+[tool.poetry.dependencies]
+python = "^3.7"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
