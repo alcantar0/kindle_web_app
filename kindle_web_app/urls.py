@@ -18,5 +18,6 @@ from django.urls import path
 from core import views
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('home/', views.home),
+    path('home/', views.upload),
+    path('home/submit', views.process_text),
 ]
