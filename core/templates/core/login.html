@@ -41,10 +41,11 @@
     
 <main class="form-files">
   <form action="submit" enctype="multipart/form-data" method="POST">{%csrf_token%}
-    <h1 class="h3 mb-3 fw-normal">Login</h1>
-
+    <h1 class="h3 mb-3 fw-normal">Upload</h1>
     <div class="form-floating">
       <input type="file" name="documento" class="form-control" id="floatingInput" placeholder="name@example.com">
+      <br>
+      <input type="text" name="titulo" placeholder="Titulo do livro">
     </div>
     <button class="w-100 btn btn-lg btn-primary" type="submit">Enviar</button>
     <p class="mt-5 mb-3 text-muted">&copy; 2022</p>
