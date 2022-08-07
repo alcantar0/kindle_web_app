@@ -1,9 +1,21 @@
 repos:
--   repo: https://github.com/psf/black
-    rev: 19.3b0
+  - repo: https://github.com/pycqa/isort
+    rev: 5.10.1
     hooks:
-    -   id: black
--   repo: https://github.com/pre-commit/mirrors-pylint
-    rev: v2.3.1
+      - id: isort
+        name: isort(python)
+  - repo: https://github.com/psf/black
+    rev: 22.6.0
+    hooks: 
+      - id: black
+        languge_version: python3.10
+  - repo: local
     hooks:
-    -   id: pylint
+      - id: pylint
+        name: pylint
+        entry: pylint
+        language: system
+        types: [python]
+        args: 
+          - "-rn"
+          - "-sn"
