@@ -2,9 +2,9 @@
 from django.shortcuts import render, redirect
 
 
-def index():
+def index(request):
     """Função que retorna para o endereço home (default)"""
-    return redirect("/home")
+    return redirect(request, "/home")
 
 
 def upload(request):
