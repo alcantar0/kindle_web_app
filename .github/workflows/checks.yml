@@ -1,0 +1,49 @@
+name: Checks
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  USE_PYTHON_VERSION: "3.10"
+
+jobs:
+  pylint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Install Poetry
+      run: pipx install poetry
+    - uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.USE_PYTHON_VERSION }}
+        cache: poetry
+    - name: Install Dependencies
+      run: |
+        poetry env use ${{ env.USE_PYTHON_VERSION }}
+        poetry install --no-interaction
+    - name: Setup pre-commit
+      run: |
+        pipx install pre-commit
+        poetry run pre-commit install --install-hooks
+    - name: Run Pylint
+      run: poetry run pre-commit run --hook-stage manual pylint --all-files
+
+  black:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Poetry
+        run: pipx install poetry
+      - uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.USE_PYTHON_VERSION }}
+          cache: poetry
+      - name: Install Dependencies
+        run: |
+          poetry env use ${{ env.USE_PYTHON_VERSION }}
+          poetry install --no-interaction
+      - name: Run Black
+        run: poetry run black --check .
