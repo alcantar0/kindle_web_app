@@ -1,10 +1,6 @@
+# pylint disable=W0613
 """Conjunto de views para o app core"""
-from django.shortcuts import render, redirect
-
-
-def index(request):
-    """Função que retorna para o endereço home (default)"""
-    return redirect(request, "/home")
+from django.shortcuts import render
 
 
 def upload(request):
