@@ -21,4 +21,5 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("home/", views.upload),
     path("home/submit", views.process_text),
+    path("", views.index),
 ]
