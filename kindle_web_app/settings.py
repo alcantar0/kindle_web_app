@@ -25,8 +25,7 @@ SECRET_KEY = "django-insecure-i9ljew4m=+!k4jb@by6k6omf6)=tlz*2te7_e9&e=k6ofu&t57
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["kindle-web-app.herokuapp.com"]
-
+ALLOWED_HOSTS = ["kindle-web-app.herokuapp.com", "localhost"]
 
 # Application definition
 

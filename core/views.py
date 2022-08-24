@@ -1,4 +1,3 @@
-# pylint disable=W0613
 """Conjunto de views para o app core"""
 from django.shortcuts import render
 
@@ -17,15 +16,19 @@ def process_text(request):
         raw_dividido = raw.split("==========")
         list_dicts = []
         for highlight in raw_dividido:
+            highlight = highlight.strip("\r")
+            highlight = highlight.strip("")
             if livro_nome not in highlight:
                 continue
             separado = highlight.split("\n")
             ind = separado[2].find("Added on ")
             data_pronta = separado[2]
             data_pronta = data_pronta[ind + 9 :]
-            # print(separado[1])
-            # print(separado[2])  # Titulo livro
-            # print(separado[4])  # Highlight
+            if separado[4].isspace():
+                continue
+            print(separado[0])  # Titulo
+            print(separado[2])  # Dados
+            print(separado[4])  # Highlight
             dict_high = {"highlight": separado[4], "data": data_pronta}
             list_dicts.append(dict_high)
         data = {"highlights": list_dicts}
