@@ -10,21 +10,7 @@
     <title>Upload File</title>
  </head>
   <body>
-      <header>
-        <svg xmlns="http://www.w3.org/2000/svg">  
-           <filter id="motion-blur-filter" filterUnits="userSpaceOnUse">
-                              <feGaussianBlur stdDeviation="100 0"></feGaussianBlur>
-                                  </filter>
-        </svg>
-
-        <!-- We use a custom attribute to set the text that the pseudo element should display and blur. In this case, we use the first character of the word. -->
-
-        <span filter-content="S">Swoosh</span>
-      </header>
-      <section class="howto">
-
-
-      </section>
+    <p>Entre em Kindle/documents e procure por 'My_Clippings'</p>
       <form action="submit" enctype="multipart/form-data" method="POST">{%csrf_token%}
         <h1 class="h3 mb-3 fw-normal">Upload</h1>
         <div class="form-floating">
