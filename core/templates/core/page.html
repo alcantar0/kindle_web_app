@@ -1,12 +1,56 @@
-<html>
-{%for highlight in highlights%}
-    <div class='container'>
-        <h3>Highlight</h3>
-        <br>
-        {{highlight.highlight}}
-        <br>
-        <h4>Data: {{highlight.data}}</h4>
-        <br>
+<!DOCTYPE html>
+<!-- Coding By CodingNepal - youtube.com/codingnepal -->
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">  
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'core/index.css' %}" >
+    <title>Kindle Notes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Iconscout Link For Icons -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+  </head>
+  <body>
+    <div class="popup-box">
+      <div class="popup">
+        <div class="content">
+          <header>
+            <p></p>
+            <i class="uil uil-times"></i>
+          </header>
+          <form action="#">
+            <div class="row title">
+              <label>Title</label>
+              <input type="text" spellcheck="false">
+            </div>
+            <div class="row description">
+              <label>Description</label>
+              <textarea spellcheck="false"></textarea>
+            </div>
+            <button></button>
+          </form>
+        </div>
+      </div>
     </div>
-{%endfor%}
+    <div class="wrapper">
+      {%for highlight in highlights%}
+      <li class="note">
+        <div class="details">
+            <span>{{highlight.highlight}}</span>
+            </div>
+         <div class="bottom-content">
+            <span>{{highlight.data}}</span>
+            <div class="settings">
+              <i onclick="showMenu(this)" class="uil uil-ellipsis-h"></i>
+            </div>
+          </div>
+        </li>
+      {%endfor%}
+    </div>
+    </div>
+
+    <script src="{% static 'core/index.js' %}"></script>
+    
+  </body>
 </html>

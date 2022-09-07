@@ -26,9 +26,9 @@ def process_text(request):
             data_pronta = data_pronta[ind + 9 :]
             if separado[4].isspace():
                 continue
-            print(separado[0])  # Titulo
-            print(separado[2])  # Dados
-            print(separado[4])  # Highlight
+            # print(separado[0])  # Titulo
+            # print(separado[2])  # Dados
+            # print(separado[4])  # Highlight
             dict_high = {"highlight": separado[4], "data": data_pronta}
             list_dicts.append(dict_high)
         data = {"highlights": list_dicts}
