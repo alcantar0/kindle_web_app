@@ -16,9 +16,10 @@
 	<div class="subtitle">Entre em Kindle/documents e procure por 'My_Clippings.txt'</div>
       	<form action="submit" enctype="multipart/form-data" method="POST">{%csrf_token%}
         <div class="input-container ic1">
-          <input type="file" name="documento" class="input" id="firstname" placeholder=" "/>
-	  <div class="cut"></div>
-	  <label for="firstname" class="placeholder">Selecione o arquivo</label>
+	  <label class="label">
+            <input type="file" name="documento" required />
+	    <span>Selecione o arquivo</span>
+	    </label>
 	</div>
 	<div class="input-container ic2">
           <input type="text" id="lastname" class="input" name="titulo" placeholder=" "/>

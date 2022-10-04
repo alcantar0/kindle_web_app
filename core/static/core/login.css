@@ -1,4 +1,28 @@
-
+label.label input[type="file"] {
+	        position: absolute;
+		        top: -1000px;
+			      }
+			            .label {
+					            cursor: pointer;
+						            border: 1px solid #cccccc;
+							            border-radius: 5px;
+								            padding: 5px 15px;
+									            margin: 5px;
+										            background: #303245;
+											            display: inline-block;
+												          }
+													        .label:hover {
+															        background: #5cbd95;
+																      }
+																            .label:active {
+																		            background: #9fa1a0;
+																			          }
+																				        .label:invalid + span {
+																						        color: #000000;
+																							      }
+																							            .label:valid + span {
+																									            color: #ffffff;
+																										          }
 body {
 	  align-items: center;
 	    background-color: #000;
