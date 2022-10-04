@@ -2,26 +2,31 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <link rel="stylesheet" href="{% static 'core/login.css' %}" >
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.84.0">
-    <title>Upload File</title>
+    <title>Enviar arquivo</title>
  </head>
   <body>
-      <header>
-        <p>Entre em Kindle/documents e procure por 'My_Clippings'</p>
-        
-      <form action="submit" enctype="multipart/form-data" method="POST">{%csrf_token%}
-        <h1 class="h3 mb-3 fw-normal">Upload</h1>
-        <div class="form-floating">
-          <input type="file" name="documento" class="form-control" id="floatingInput" placeholder="name@example.com">
-          <br>
-          <input type="text" name="titulo" placeholder="Titulo do livro">
-        </div>
-      <button class="w-100 btn btn-lg btn-primary" type="submit">Enviar</button>
-      <p class="mt-5 mb-3 text-muted">&copy; 2022</p>
-      </form>
+	<div class="form">
+	<div class="title">Kindle - Clippings</div>
+	<div class="subtitle">Entre em Kindle/documents e procure por 'My_Clippings.txt'</div>
+      	<form action="submit" enctype="multipart/form-data" method="POST">{%csrf_token%}
+        <div class="input-container ic1">
+          <input type="file" name="documento" class="input" id="firstname" placeholder=" "/>
+	  <div class="cut"></div>
+	  <label for="firstname" class="placeholder">Selecione o arquivo</label>
+	</div>
+	<div class="input-container ic2">
+          <input type="text" id="lastname" class="input" name="titulo" placeholder=" "/>
+	  <div class="cut"></div>
+	  <label for="lastname" class="placeholder">Nome do livro</label>
+	</div>
+      	<button class="submit" type="submit">Enviar</button>
+      	</form>
+	</div>
   </body>
 </html>
