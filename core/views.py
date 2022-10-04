@@ -1,5 +1,6 @@
 """Conjunto de views para o app core"""
 from django.shortcuts import render
+from core.utils import proccess_data
 
 
 def upload(request):
@@ -22,13 +23,17 @@ def process_text(request):
                 continue
             separado = highlight.split("\n")
             ind = separado[2].find("Added on ")
-            data_pronta = separado[2]
-            data_pronta = data_pronta[ind + 9 :]
+            string_data_raw = separado[2]
+            string_data_raw = string_data_raw[ind + 9 :]
             if separado[4].isspace():
                 continue
+
             # print(separado[0])  # Titulo
             # print(separado[2])  # Dados
             # print(separado[4])  # Highlight
+
+            data = proccess_data.transform_to_list(string_data_raw)
+            data_pronta = proccess_data.convert_to_string(*data)
             dict_high = {"highlight": separado[4], "data": data_pronta}
             list_dicts.append(dict_high)
         data = {"highlights": list_dicts}
