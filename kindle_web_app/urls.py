@@ -20,7 +20,7 @@ from core import views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("home/", views.upload),
+    path("home/", views.home),
     path("home/submit", views.process_text),
     path("", RedirectView.as_view(url="/home")),
 ]
