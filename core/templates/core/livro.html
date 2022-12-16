@@ -9,8 +9,9 @@
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.84.0">
     <title>Enviar arquivo</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
  </head>
-  <body>
+  
 	<div class="form">
 	<div class="title">Kindle - Clippings</div>
 	<div class="subtitle">Entre em Kindle/documents e procure por 'My_Clippings.txt'</div>
@@ -18,12 +19,30 @@
 	{%csrf_token%}
         <div class="input-container ic1">
 	  <label class="label">
-	<input type="file" name="documento" required />
+		<input type="text" id="documento" required />
 	    <span>Selecione o arquivo</span>
 	    </label>
 	</div>
       	<button class="submit" type="submit">Enviar</button>
       	</form>
 	</div>
+	  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+	  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+	  <script>
+	  	console.log('hello')
+	    $( function() {
+		var availableTags = [
+			{% for title in list_titles %}
+				"{{title}}",
+			{% endfor %}
+			];
+	         $( "#documento" ).autocomplete({
+			source: availableTags
+		 });
+        } );
+	</script>
   </body>
 </html>
+        {% for title in titles %}
+            "{{titles}}",
+        {% endfor %}

@@ -18,9 +18,11 @@ from django.contrib import admin
 from django.urls import path
 from core import views
 
+
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("home/", views.upload),
+    path("home/", views.home),
     path("home/submit", views.process_text),
+    path("escolher/submit", views.listar),
     path("", RedirectView.as_view(url="/home")),
 ]
