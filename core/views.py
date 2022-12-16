@@ -1,6 +1,10 @@
 """Conjunto de views para o app core"""
 from django.shortcuts import render
+from django.db import transaction
+
 from core.utils import proccess_data
+
+from core.models import Livro
 
 
 def home(request):
@@ -8,6 +12,7 @@ def home(request):
     return render(request, "core/login.html")
 
 
+@transaction.non_atomic_requests
 def process_text(request):  # pylint: disable=R0914 R1710
 
     """Função que processa e retorna os highlights do arquivo"""
@@ -36,7 +41,8 @@ def process_text(request):  # pylint: disable=R0914 R1710
                 string_data_raw = separado[1]
                 titulo = separado[0]
                 highlight = separado[3]
-                titles.append(separado[0])
+                titles.append(f"{separado[0]}")
+                print(f"{separado[0]}")
             else:
                 if separado[1] not in titles:
                     titles.append(separado[1])
@@ -53,7 +59,17 @@ def process_text(request):  # pylint: disable=R0914 R1710
             data = proccess_data.transform_to_list(string_data_raw)
             data_pronta = proccess_data.convert_to_string(*data)
             dict_high = {"titulo": titulo, "data": data_pronta, "highlight": highlight}
-            # Livro.objects.create(**dict_high)
+            if not Livro.objects.filter(**dict_high).exists():  # pylint: disable=E1101
+                Livro.objects.create(**dict_high)  # pylint: disable=E1101
             list_dicts.append(dict_high)
             counter += 1
-        return render(request, "core/page.html", {"dados": list_dicts})
+        titles = Livro.objects.all().distinct("titulo")  # pylint: disable=E1101
+        return render(request, "core/teste.html", {"titles": titles})
+
+
+def listar(request):  # pylint: disable=R1710
+    """Lista os highlights"""
+    if request.method == "POST":
+        titulo = request.POST.get("nome_livro")
+        titles = Livro.objects.filter(titulo__contains=titulo)  # pylint: disable=E1101
+        return render(request, "core/page.html", {"dados": titles})

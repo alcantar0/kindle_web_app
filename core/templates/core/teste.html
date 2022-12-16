@@ -3,37 +3,27 @@
 <html>
 <head>
     <title>AutoComplete</title>
-    <script src=  
-"https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js">  
-    </script>  
-    
-    <script src=  
-"https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.js">  
-    </script>  
-    
-    <link href=  
-"http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/ui-lightness/jquery-ui.css"
-        rel="stylesheet" type="text/css" />  
+<!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 </head>
 <body>
-    <h1>Welcome to GFG</h1>
-    <input type="text" id="tags">
-    {% for title in titles %}
-            {{title}},
-        {% endfor %}
-    <script>
-  $( function() {
-    var availableTags = [
+    <div class="container">
+        <div class="row">
+            <div class="col-6 mx-auto text-center mt-5">
+                <h2>Escolha o livro</h2>
+                <form action="/escolher/submit" enctype="multipart/form-data" method="POST">
+    {%csrf_token%}
+                <input type="text" id="tags" name="nome_livro" list="titles" class="form-control">
+    <datalist id="titles">
         {% for title in titles %}
-            '{{title}}',
+        <option value="{{title.titulo}}"></option>
         {% endfor %}
-    ]
-    window.alert(availableTags);
-    ;
-    $( "#tags" ).autocomplete({
-      source: availableTags
-    });
-  } );
-  </script>
+    </datalist>
+            <button class="submit" type="submit">Enviar</button>
+        </form>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
