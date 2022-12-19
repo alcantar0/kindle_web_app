@@ -9,7 +9,7 @@ from core.models import Livro
 
 def home(request):
     """Função que gera a página de envio do arquivo"""
-    return render(request, "core/login.html")
+    return render(request, "core/index.html")
 
 
 @transaction.non_atomic_requests
@@ -18,6 +18,7 @@ def process_text(request):  # pylint: disable=R0914 R1710
     """Função que processa e retorna os highlights do arquivo"""
     if request.method == "POST":  # pylint: disable=R1710
         uploaded_file = request.FILES["documento"]
+        print(request.FILES)
         raw = uploaded_file.read().decode("UTF-8")
         # livro_nome = "Scar Tissue"
         raw_dividido = raw.split("==========")
@@ -41,6 +42,7 @@ def process_text(request):  # pylint: disable=R0914 R1710
                 string_data_raw = separado[1]
                 titulo = separado[0]
                 highlight = separado[3]
+
                 titles.append(f"{separado[0]}")
                 print(f"{separado[0]}")
             else:
