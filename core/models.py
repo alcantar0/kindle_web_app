@@ -14,3 +14,4 @@ class Livro(models.Model):
     titulo = models.TextField(max_length=500)
     data = models.TextField()
     highlight = models.TextField()
+    anotacao = models.TextField(null=True)
