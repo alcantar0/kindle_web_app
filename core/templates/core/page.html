@@ -40,7 +40,12 @@
             <span>{{highlight.highlight}}</span>
             </div>
          <div class="bottom-content">
-            <span>Sua anotação</span>
+            {% if highlight.anotacao == "0" %} 
+              <span>Sem anotação</span>
+              {%endif%}
+              {% if highlight.anotacao != "0"%} 
+              <span>{{highlight.anotacao}}</span>
+              {%endif%}
           </div>
             <div class="bottom-content">
             <span>{{highlight.data}}</span>
