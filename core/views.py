@@ -24,6 +24,9 @@ def process_text(request):  # pylint: disable=R0914 R1710
         print(request.FILES)
         raw = uploaded_file.read().decode("UTF-8")
         raw = raw.split("\n")
+
+        raw = [element for element in raw if (element and element.strip())]
+
         counter = 0
         see = True
         mark = []
@@ -35,6 +38,10 @@ def process_text(request):  # pylint: disable=R0914 R1710
             except IndexError:
                 see = False
                 break
+            if data[0:8] == "- Your B":
+                counter += 3
+                continue
+
             if data[0:8] == "- Your N":
                 if raw[counter] not in titles:
                     titles.append(raw[counter])
@@ -46,16 +53,16 @@ def process_text(request):  # pylint: disable=R0914 R1710
                 dicionario = {
                     "titulo": raw[counter],
                     "data": data_pronta,
-                    "highlight": raw[counter + 8],
-                    "anotacao": raw[counter + 3],
+                    "highlight": raw[counter + 6],
+                    "anotacao": raw[counter + 2],
                 }
-                counter += 10
+                counter += 8
                 mark.append(dicionario)
                 if not Livro.objects.filter(  # pylint: disable=E1101
                     **dicionario
                 ).exists():  # pylint: disable=E1101
                     Livro.objects.create(**dicionario)  # pylint: disable=E1101
-            else:
+            elif data[0:8] == "- Your H":
                 if raw[counter] not in titles:
                     titles.append(raw[counter])
                 ind = raw[counter + 1].find("Added on ")
@@ -67,15 +74,17 @@ def process_text(request):  # pylint: disable=R0914 R1710
                 dicionario = {
                     "titulo": raw[counter],
                     "data": data_pronta,
-                    "highlight": raw[counter + 3],
+                    "highlight": raw[counter + 2],
                     "anotacao": "0",
                 }
-                counter += 5
+                counter += 4
                 mark.append(dicionario)
                 if not Livro.objects.filter(  # pylint: disable=E1101
                     **dicionario
                 ).exists():  # pylint: disable=E1101
                     Livro.objects.create(**dicionario)  # pylint: disable=E1101
+            else:
+                counter += 1
         titles = Livro.objects.all().distinct("titulo")  # pylint: disable=E1101
         return render(request, "core/teste.html", {"titles": titles})
 
@@ -90,5 +99,4 @@ def listar(request):  # pylint: disable=R1710
 
         cursor = connection.cursor()
         cursor.execute("TRUNCATE TABLE core_livro")
-
         return render(request, "core/page.html", {"dados": titles})
