@@ -1,5 +1,8 @@
 """Conjunto de views para o app core"""
 from django.shortcuts import render
+
+from django.db import connection
+
 from django.db import transaction
 
 from core.utils import proccess_data
@@ -77,9 +80,15 @@ def process_text(request):  # pylint: disable=R0914 R1710
         return render(request, "core/teste.html", {"titles": titles})
 
 
+@transaction.non_atomic_requests
 def listar(request):  # pylint: disable=R1710
     """Lista os highlights"""
     if request.method == "POST":
         titulo = request.POST.get("nome_livro")
         titles = Livro.objects.filter(titulo__contains=titulo)  # pylint: disable=E1101
+        titles = list(titles)
+
+        cursor = connection.cursor()
+        cursor.execute("TRUNCATE TABLE core_livro")
+
         return render(request, "core/page.html", {"dados": titles})
