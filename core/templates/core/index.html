@@ -86,17 +86,17 @@
     <div class="col-lg-6 mx-auto">
       <p class="lead mb-4">Visualize rapidamente suas marcações e anotações feitas em livros no seu Kindle.</p>
       <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-        <button type="button" action="#login" class="btn btn-primary btn-lg px-4 gap-3">Começar!</button>
+        <button type="button" onClick="document.getElementById('comecar').scrollIntoView();" class="btn btn-primary btn-lg px-4 gap-3">Começar!</button>
       </div>
     </div>
   </div>
 
   <div class="b-example-divider"></div>
 
-  <div class="container col-xl-10 col-xxl-8 px-4 py-5">
+  <div id="comecar" class="container col-xl-10 col-xxl-8 px-4 py-5">
     <div class="row align-items-center g-lg-5 py-5">
       <div class="col-lg-7 text-center text-lg-start">
-        <h1 class="display-4 fw-bold lh-1 mb-3">Selecione o arquivo</h1>
+        <h1 class="display-4 fw-bold lh-1 mb-3" >Selecione o arquivo</h1>
         <p class="col-lg-10 fs-4">Entre em Kindle/documents e procure por 'My_Clippings.txt'</p>
       </div>
       <div class="col-md-10 mx-auto col-lg-5">
@@ -121,8 +121,10 @@
         <h1 class="display-4 fw-bold lh-1">Marcações, anotações e data</h1>
         <p class="lead">Veja suas marcações, anotações facilmente. Seus dados não ficam salvos, qualquer dúvida, veja o código open-source no repositório: <a href="https://github.com/alcantar0/kindle_web_app" target="_blank">Github</a></a></p>
         <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
+          <!--
           <button type="button" class="btn btn-primary btn-lg px-4 me-md-2 fw-bold">Primary</button>
           <button type="button" class="btn btn-outline-secondary btn-lg px-4">Default</button>
+          -->
         </div>
       </div>
       <div class="col-lg-4 offset-lg-1 p-0 overflow-hidden shadow-lg">
