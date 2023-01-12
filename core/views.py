@@ -17,8 +17,7 @@ def home(request):
 
 @transaction.non_atomic_requests
 def process_text(request):  # pylint: disable=R0914 R1710 R0912 R0915
-
-    """Função que processa e retorna os highlights do arquivo"""
+    """simsim"""
     if request.method == "POST":  # pylint: disable=R1710
         uploaded_file = request.FILES["documento"]
         print(request.FILES)
@@ -31,40 +30,17 @@ def process_text(request):  # pylint: disable=R0914 R1710 R0912 R0915
         see = True
         mark = []
         titles = []
-
+        dicionario = {}
         while see is True:
             try:
                 data = raw[counter + 1]
             except IndexError:
                 see = False
                 break
-            if data[0:8] == "- Your B" or data[0:6] == "- Seu m":
+            if data[0:7] == "- Seu m":
                 counter += 3
 
-            elif data[0:8] == "- Your N":
-                if raw[counter] not in titles:
-                    titles.append(raw[counter])
-                ind = raw[counter + 1].find("Added on ")
-                string_data_raw = raw[counter + 1]
-                string_data_raw = string_data_raw[ind + 9 :]
-                print(string_data_raw)
-                data = proccess_data.transform_to_list(string_data_raw)
-                data_pronta = proccess_data.convert_to_string(*data)
-
-                dicionario = {
-                    "titulo": raw[counter],
-                    "data": data_pronta,
-                    "highlight": raw[counter + 6],
-                    "anotacao": raw[counter + 2],
-                }
-                counter += 8
-                mark.append(dicionario)
-                if not Livro.objects.filter(  # pylint: disable=E1101
-                    **dicionario
-                ).exists():  # pylint: disable=E1101
-                    Livro.objects.create(**dicionario)  # pylint: disable=E1101
-
-            elif data[0:6] == "- Sua n":
+            elif data[0:7] == "- Sua n":
                 if raw[counter] not in titles:
                     titles.append(raw[counter])
                 ind = raw[counter + 1].find("Adicionado: ")
@@ -79,12 +55,8 @@ def process_text(request):  # pylint: disable=R0914 R1710 R0912 R0915
                 }
                 counter += 8
                 mark.append(dicionario)
-                if not Livro.objects.filter(  # pylint: disable=E1101
-                    **dicionario
-                ).exists():  # pylint: disable=E1101
-                    Livro.objects.create(**dicionario)  # pylint: disable=E1101
 
-            elif data[0:6] == "- Seu d":
+            elif data[0:7] == "- Seu d":
                 if raw[counter] not in titles:
                     titles.append(raw[counter])
                 ind = raw[counter + 1].find("Adicionado: ")
@@ -99,10 +71,58 @@ def process_text(request):  # pylint: disable=R0914 R1710 R0912 R0915
                 }
                 counter += 4
                 mark.append(dicionario)
-                if not Livro.objects.filter(  # pylint: disable=E1101
-                    **dicionario
-                ).exists():  # pylint: disable=E1101
-                    Livro.objects.create(**dicionario)  # pylint: disable=E1101
+            else:
+                counter += 1
+            if not Livro.objects.filter(  # pylint: disable=E1101
+                **dicionario
+            ).exists():  # pylint: disable=E1101
+                Livro.objects.create(**dicionario)  # pylint: disable=E1101
+        titles = Livro.objects.all().distinct("titulo")  # pylint: disable=E1101
+        return render(request, "core/teste.html", {"titles": titles})
+
+
+@transaction.non_atomic_requests
+def process_text_pt(request):  # pylint: disable=R0914 R1710 R0912 R0915
+    """Função que processa e retorna os highlights do arquivo"""
+    if request.method == "POST":  # pylint: disable=R1710
+        uploaded_file = request.FILES["documento"]
+        print(request.FILES)
+        raw = uploaded_file.read().decode("UTF-8")
+        raw = raw.split("\n")
+
+        raw = [element for element in raw if (element and element.strip())]
+
+        counter = 0
+        see = True
+        mark = []
+        titles = []
+        dicionario = {}
+        while see is True:
+            try:
+                data = raw[counter + 1]
+            except IndexError:
+                see = False
+                break
+            if data[0:8] == "- Your B":
+                counter += 3
+                continue
+
+            if data[0:8] == "- Your N":
+                if raw[counter] not in titles:
+                    titles.append(raw[counter])
+                ind = raw[counter + 1].find("Added on ")
+                string_data_raw = raw[counter + 1]
+                string_data_raw = string_data_raw[ind + 9 :]
+                data = proccess_data.transform_to_list(string_data_raw)
+                data_pronta = proccess_data.convert_to_string(*data)
+                dicionario = {
+                    "titulo": raw[counter],
+                    "data": data_pronta,
+                    "highlight": raw[counter + 6],
+                    "anotacao": raw[counter + 2],
+                }
+                counter += 8
+                mark.append(dicionario)
 
             elif data[0:8] == "- Your H":
                 if raw[counter] not in titles:
@@ -127,6 +147,13 @@ def process_text(request):  # pylint: disable=R0914 R1710 R0912 R0915
                     Livro.objects.create(**dicionario)  # pylint: disable=E1101
             else:
                 counter += 1
+            if not Livro.objects.filter(  # pylint: disable=E1101
+                **dicionario
+            ).exists():  # pylint: disable=E1101
+                cursor = connection.cursor()
+                cursor.execute(
+                    f"INSERT INTO core_livro(titulo, data, highlight, anotacao)VALUES ({dicionario['titulo']}, {dicionario['data']}, {dicionario['highlight']}, {dicionario['anotacao']},);"  # pylint: disable=C0301
+                )
         titles = Livro.objects.all().distinct("titulo")  # pylint: disable=E1101
         return render(request, "core/teste.html", {"titles": titles})
 
