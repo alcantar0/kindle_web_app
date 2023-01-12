@@ -147,13 +147,10 @@ def process_text_pt(request):  # pylint: disable=R0914 R1710 R0912 R0915
                     Livro.objects.create(**dicionario)  # pylint: disable=E1101
             else:
                 counter += 1
-            if not Livro.objects.filter(  # pylint: disable=E1101
-                **dicionario
-            ).exists():  # pylint: disable=E1101
-                cursor = connection.cursor()
-                cursor.execute(
-                    f"INSERT INTO core_livro(titulo, data, highlight, anotacao)VALUES ({dicionario['titulo']}, {dicionario['data']}, {dicionario['highlight']}, {dicionario['anotacao']},);"  # pylint: disable=C0301
-                )
+            cursor = connection.cursor()
+            cursor.execute(
+                f"INSERT INTO core_livro(titulo, data, highlight, anotacao)VALUES ({dicionario['titulo']}, {dicionario['data']}, {dicionario['highlight']}, {dicionario['anotacao']},);"  # pylint: disable=C0301
+            )
         titles = Livro.objects.all().distinct("titulo")  # pylint: disable=E1101
         return render(request, "core/teste.html", {"titles": titles})
 
