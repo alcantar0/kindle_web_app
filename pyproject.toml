@@ -17,6 +17,7 @@ whitenoise = "^6.2.0"
 python-dotenv = "^0.21.0"
 django-autocomplete-light = "^3.9.4"
 psycopg2 = "^2.9.5"
+dj-database-url = "^1.2.0"
 
 [tool.poetry.dev-dependencies]
 
