@@ -22,7 +22,7 @@
                 <input type="text" id="tags" name="nome_livro" list="titles" class="form-control">
     <datalist id="titles">
         {% for title in titles %}
-        <option value="{{title.titulo}}"></option>
+        <option value="{{title}}"></option>
         {% endfor %}
     </datalist>
             <button class="submit" type="submit">Enviar</button>
