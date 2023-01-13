@@ -20,7 +20,7 @@ load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-if os.environ.get("DJANGO_ENVIROMENT") == "production":
+if os.getenv("DJANGO_ENVIROMENT") == "production":
     DEBUG = False
     DATABASES = {
         "default": {
