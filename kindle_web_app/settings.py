@@ -85,7 +85,7 @@ DATABASES = {
     "default": dj_database_url.config(default=DATABASE_URL, conn_max_age=1800),
 }
 """
-if os.getenv("DJANGO_ENVIROMENT") == "production":
+if os.environ.get("DJANGO_ENVIROMENT") == "production":
     DEBUG = False
     DATABASES = {
         "default": {
