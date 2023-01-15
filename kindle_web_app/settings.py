@@ -34,7 +34,7 @@ if os.environ.get("DJANGO_ENVIROMENT") == "production":
 else:
     DEBUG = True
 """
-DEBUG = True
+DEBUG = False
 ALLOWED_HOSTS = ["web-production-78f6.up.railway.app", "127.0.0.1"]
 # Application definition
 
