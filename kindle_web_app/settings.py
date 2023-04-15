@@ -13,9 +13,9 @@ from pathlib import Path
 import os
 import dj_database_url  # pylint: disable=W0611
 
-# from dotenv import load_dotenv
+from dotenv import load_dotenv
 
-# load_dotenv()
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,6 +26,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv("SECRET_KEY")
+
+# Build paths inside the project like this: BASE_DIR / 'subdir'
+# Build paths inside the project like this: BASE_DIR / 'subdir'
 # SECRET_KEY = "(hx_n3I@$W!ZV!uJ$_s~B]Wjd{A4YKz;rJDF+F97h#NhUv&CL8"
 # SECURITY WARNING: don't run with debug turned on in production!
 if os.environ.get("DJANGO_ENVIROMENT") == "production":
@@ -34,7 +37,7 @@ if os.environ.get("DJANGO_ENVIROMENT") == "production":
 else:
     DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["http://3.137.206.230", "https://web-production-78f6.up.railway.app"]
 # Application definition
 
 INSTALLED_APPS = [
