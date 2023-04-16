@@ -56,7 +56,6 @@ def process_text(request):  # pylint: disable=R0914 R1710 R0912 R0915
                 }
                 counter += 8
                 mark.append(dicionario)
-
             elif data[0:7] == "- Seu d":
                 if raw[counter] not in titles:
                     titles.append(raw[counter])
