@@ -30,7 +30,7 @@ SECRET_KEY = config("SECRET_KEY")
 # SECRET_KEY = "(hx_n3I@$W!ZV!uJ$_s~B]Wjd{A4YKz;rJDF+F97h#NhUv&CL8"
 # SECURITY WARNING: don't run with debug turned on in production!
 
-ALLOWED_HOSTS = ["http://3.137.206.230", "https://web-production-78f6.up.railway.app"]
+ALLOWED_HOSTS = ["3.137.206.230", "web-production-78f6.up.railway.app"]
 
 if config("DJANGO_ENVIROMENT") == "production":
 
