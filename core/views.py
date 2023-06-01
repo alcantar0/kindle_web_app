@@ -1,8 +1,6 @@
 """Conjunto de views para o app core"""
 from django.shortcuts import render
 
-from django.db import transaction
-
 from core.utils import proccess_data
 
 
@@ -17,7 +15,6 @@ def home(request):
     return render(request, "core/index.html")
 
 
-@transaction.non_atomic_requests
 def process_text(request):  # pylint: disable=R0914 R1710 R0912 R0915
     """simsim"""
     if request.method == "POST":  # pylint: disable=R1710
@@ -113,7 +110,6 @@ def process_text(request):  # pylint: disable=R0914 R1710 R0912 R0915
         return render(request, "core/teste.html", {"titles": titles})
 
 
-@transaction.non_atomic_requests
 def listar(request):  # pylint: disable=R1710
     """Lista os highlights"""
     if request.method == "POST":
