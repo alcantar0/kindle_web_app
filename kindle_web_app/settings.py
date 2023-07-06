@@ -34,7 +34,7 @@ ALLOWED_HOSTS = [""]
 
 if config("DJANGO_ENVIROMENT") == "production":
     ALLOWED_HOSTS.append("https://kindle-web-app.onrender.com")
-    DEBUG = False
+    DEBUG = True
 else:
     DEBUG = True
     ALLOWED_HOSTS.append("127.0.0.1")
