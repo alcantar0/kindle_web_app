@@ -30,11 +30,11 @@ SECRET_KEY = config("SECRET_KEY")
 # SECRET_KEY = "(hx_n3I@$W!ZV!uJ$_s~B]Wjd{A4YKz;rJDF+F97h#NhUv&CL8"
 # SECURITY WARNING: don't run with debug turned on in production!
 
-ALLOWED_HOSTS = [""]
+ALLOWED_HOSTS = []
 
 if config("DJANGO_ENVIROMENT") == "production":
-    ALLOWED_HOSTS.append("https://kindle-web-app.onrender.com")
-    DEBUG = True
+    ALLOWED_HOSTS.append("kindle-web-app.onrender.com")
+    DEBUG = False
 else:
     DEBUG = True
     ALLOWED_HOSTS.append("127.0.0.1")
