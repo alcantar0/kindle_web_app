@@ -35,4 +35,3 @@ tzdata==2022.1
 uWSGI==2.0.21
 whitenoise==6.2.0
 wrapt==1.14.1
-setuptools==68.0.0
