@@ -33,9 +33,9 @@ SECRET_KEY = config("SECRET_KEY")
 ALLOWED_HOSTS = []
 
 if config("DJANGO_ENVIROMENT") == "production":
-    ALLOWED_HOSTS.append(
-        "kindle-web-app.onrender.com", "web-production-78f6.up.railway.app"
-    )
+    ALLOWED_HOSTS.append("kindle-web-app.onrender.com")
+
+    ALLOWED_HOSTS.append("web-production-78f6.up.railway.app")
     DEBUG = True
 else:
     DEBUG = False
