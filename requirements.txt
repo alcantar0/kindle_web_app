@@ -32,5 +32,7 @@ tomli==2.0.1
 tomlkit==0.11.1
 typing_extensions==4.3.0
 tzdata==2022.1
+uWSGI==2.0.21
 whitenoise==6.2.0
 wrapt==1.14.1
+setuptools==68.0.0
