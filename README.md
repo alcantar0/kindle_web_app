@@ -1,8 +1,8 @@
 # Kindle Web App - Clippings
 
 
-### App no AWS:
-  http://3.137.206.230:8000/
+### App no Render:
+  https://kindle-web-app.onrender.com/home/
 
 ### App no Railway:
   https://web-production-78f6.up.railway.app/home/
