@@ -34,11 +34,10 @@ ALLOWED_HOSTS = []
 
 if config("DJANGO_ENVIROMENT") == "production":
     ALLOWED_HOSTS.append("kindle-web-app.onrender.com")
-
-    ALLOWED_HOSTS.append("web-production-78f6.up.railway.app")
-    DEBUG = True
-else:
     DEBUG = False
+
+else:
+    DEBUG = True
     ALLOWED_HOSTS.append("127.0.0.1")
 
 # Application definition
@@ -88,33 +87,34 @@ WSGI_APPLICATION = "kindle_web_app.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-"""
 
 
-DATABASE_URL = os.getenv("DATABASE_URL")
+DATABASE_URL = config("DATABASE_URL")
 
 DATABASES = {
     "default": dj_database_url.config(default=DATABASE_URL, conn_max_age=1800),
 }
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": os.getenv("PGDATABASE"),
-        "USER": os.getenv("PGUSER"),
-        "PASSWORD": os.getenv("PGPASSWORD"),
-        "HOST": os.getenv("PGHOST"),
-        "PORT": os.getenv("PGPORT"),
-    }
-}
-"""
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
-    }
-}
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql_psycopg2",
+#         "NAME": os.getenv("HOST"),
+#         "USER": os.getenv("USERNAME"),
+#         "PASSWORD": os.getenv("PASSWORD"),
+#         "HOST": os.getenv("HOST"),
+#         "PORT": os.getenv("PORT"),
+#     }
+# }
+
+
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+#     }
+# }
+
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
